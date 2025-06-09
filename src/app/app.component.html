@@ -2,8 +2,10 @@
 
 <main>
     <ul id="users">
-        <li>
-            <app-user />
-        </li>
+        @for (item of users; track $index) {
+            <li>
+                <app-user [avatar]="users[$index].avatar" [name]="users[$index].name" />
+            </li>
+        }
     </ul>
 </main>
