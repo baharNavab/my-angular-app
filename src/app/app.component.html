@@ -4,7 +4,12 @@
     <ul id="users">
         @for (item of users; track $index) {
             <li>
-                <app-user [avatar]="users[$index].avatar" [name]="users[$index].name" />
+                <app-user 
+                    [id]="users[$index].id"
+                    [avatar]="users[$index].avatar" 
+                    [name]="users[$index].name"
+                    (select)="onSelectUser($event)"
+                />
             </li>
         }
     </ul>
