@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { UserModel } from '../models/user.model';
 
 @Component({
   selector: 'app-user',
@@ -6,16 +7,19 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
-export class UserComponent {
-  @Input({required: true}) id!: string;
-  @Input({required: true}) avatar!: string;
-  @Input({required: true}) name!: string;
+export class UserComponent implements OnInit {
+  @Input({ required: true }) user!: UserModel;
+  @Input({required: true}) selected!: boolean;
   @Output() select = new EventEmitter<string>();
 
+  ngOnInit(): void {
+    console.log(this.user);
+  }
+
   get imagePath () {
-    return 'assets/users/' + this.avatar;
+    return 'assets/users/' + this.user.avatar;
   }
   public onSelectedUser() {
-    this.select.emit(this.id);
+    this.select.emit(this.user.id);
   }
 }
